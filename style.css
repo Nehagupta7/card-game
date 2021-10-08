@@ -1,0 +1,121 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Kaushan Script", cursive;
+  color: white;
+}
+body {
+  background-image: linear-gradient(rgba(67, 41, 88, 0.459), rgb(35, 2, 56)),
+    url(images/background/purple.jpg);
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+}
+.game-container {
+  height: 100vh;
+  width: 60%;
+  margin: auto;
+}
+h2 {
+  text-align: center;
+  margin: 1rem;
+  font-size: 2rem;
+}
+.game-start {
+  display: flex;
+  align-items: center;
+  font-size: 1.4rem;
+
+  justify-content: space-between;
+  margin: auto 1rem;
+}
+.game-over {
+  display: none;
+}
+.game-over.visible {
+  position: fixed;
+  color: white;
+  background-color: rgba(40, 39, 41, 0.459);
+  z-index: 99;
+  height: 100vh;
+  width: 60%;
+  font-size: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.replay-btn {
+  height: 3.5rem;
+  width: 9rem;
+  background-color: transparent;
+  color: white;
+  font-size: 2rem;
+  border: 0.1em solid white;
+  padding: 0.1rem;
+  border-radius: 0.5rem;
+  transition: color 0.2s ease-in;
+}
+.replay-btn:hover {
+  color: black;
+  background-color: white;
+  transition: color 0.8s ease-out;
+}
+
+.card-container {
+  height: 80vh;
+  width: 100%;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-gap: 0.3rem;
+  overflow: hidden;
+  perspective: 50rem;
+}
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+
+  transition: transform 0.2s linear;
+}
+.card.visible {
+  transform: rotatey(180deg);
+  pointer-events: none;
+}
+
+.front-face {
+  transform: rotatey(0deg);
+  transition: 0.1s linear;
+}
+
+.front-face,
+.back-face {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  transition: 0.5s;
+  width: 7rem;
+  height: 9rem;
+}
+
+.back-face img {
+  width: 7rem;
+  height: 9rem;
+  z-index: 6;
+  border-radius: 0.5rem;
+}
+.front-face img {
+  width: 4rem;
+  height: 5rem;
+  border-radius: 0.5rem;
+}
