@@ -10,7 +10,6 @@ body {
     url(images/background/purple.jpg);
 
   background-position: center;
-  background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
   width: 100%;
@@ -83,7 +82,6 @@ h2 {
   justify-content: center;
   transform-style: preserve-3d;
   backface-visibility: hidden;
-
   transition: transform 0.2s linear;
 }
 .card.visible {
@@ -91,11 +89,13 @@ h2 {
   pointer-events: none;
 }
 
+.back-face.visible {
+  transform: rotatey(180deg);
+}
 .front-face {
   transform: rotatey(0deg);
   transition: 0.1s linear;
 }
-
 .front-face,
 .back-face {
   position: absolute;
@@ -118,4 +118,95 @@ h2 {
   width: 4rem;
   height: 5rem;
   border-radius: 0.5rem;
+}
+.card.matched .front-face img {
+  width: 5rem;
+  height: 7rem;
+  border-radius: 0.5rem;
+  animation: moving 1s linear;
+}
+
+@keyframes moving {
+  0% {
+    transform: rotateY(50deg);
+  }
+  30% {
+    transform: rotateY(30deg);
+  }
+  60% {
+    transform: rotateY(80deg);
+  }
+  100% {
+    transform: rotateY(120deg);
+  }
+}
+@media (max-width: 60rem) {
+  .card-container {
+    grid-template-columns: repeat(4, auto);
+  }
+
+  .back-face img {
+    width: 5rem;
+    height: 7rem;
+  }
+  .front-face,
+  .back-face {
+    background-color: black;
+    width: 5rem;
+    height: 7rem;
+  }
+  .card.matched .front-face img {
+    width: 4rem;
+    height: 5rem;
+  }
+}
+@media (max-width: 30rem) {
+  .card-container {
+    grid-template-columns: repeat(3, auto);
+  }
+
+  .back-face img {
+    width: 4rem;
+    height: 5rem;
+  }
+  .front-face img {
+    width: 2.5rem;
+    height: 3rem;
+  }
+  .front-face,
+  .back-face {
+    background-color: black;
+    width: 4rem;
+    height: 5rem;
+  }
+  .card.matched .front-face img {
+    width: 3rem;
+    height: 3rem;
+  }
+  .game-over.visible {
+    font-size: 2.5rem;
+    height: 100vh;
+    width: 100%;
+  }
+  .replay-btn {
+    font-size: 1.5rem;
+    height: 3rem;
+    width: 7rem;
+  }
+  .game-container {
+    width: 100%;
+  }
+}
+@media (max-width: 20rem) {
+  .card-container {
+    grid-template-columns: repeat(2, auto);
+    height: 100vh;
+    width: 100%;
+    overflow: visible;
+    margin-bottom: 1rem;
+  }
+  .card {
+    grid-gap: 1rem;
+    margin: 3rem 0;
+  }
 }

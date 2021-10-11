@@ -7,6 +7,16 @@ const cardContainer = document.querySelector(".card-container");
 let startTimer = 100;
 let visibleCard = [];
 let scores = 0;
+
+//suffle card
+(function sufflecard() {
+  cards.forEach((card) => {
+    let random = Math.floor(Math.random() * 12);
+    card.style.order = random;
+    console.log(random);
+  });
+})();
+
 // set the interval and won ,replay and game over
 const timerStore = setInterval(() => {
   startTimer = startTimer - 1;
@@ -20,12 +30,19 @@ const timerStore = setInterval(() => {
     gameWon();
   }
 }, 1000);
-cards.forEach((card) => {
-  card.addEventListener("click", () => {
-    flipCard(card);
-    matchedOrUnmatched(card);
-  });
-});
+
+//flip audio
+const flipAudio = () => {
+  const audio = new Audio("memory game/images/audio/flip.wav");
+  audio.play();
+};
+
+//match audio
+const matchAudio = () => {
+  const audio = new Audio("memory game/images/audio/match.wav");
+  audio.play();
+};
+
 // match card
 const matchedOrUnmatched = (item) => {
   visibleCard.push(item);
@@ -42,20 +59,26 @@ const matchedOrUnmatched = (item) => {
   }
 };
 
-//card matched
+//when the two cards are matched
 const matched = () => {
-  console.log("matched");
+  visibleCard[0].classList.add("matched");
+  visibleCard[1].classList.add("matched");
   visibleCard = [];
-  countScore();
+  setTimeout(() => {
+    matchAudio();
+    countScore();
+  }, 1000);
 };
 
-//card unmatched
+//when the two cards are not matched
 const unmatched = () => {
-  console.log("no match");
-  visibleCard[0].classList.remove("visible");
-  visibleCard[1].classList.remove("visible");
-  visibleCard = [];
+  setTimeout(() => {
+    visibleCard[0].classList.remove("visible");
+    visibleCard[1].classList.remove("visible");
+    visibleCard = [];
+  }, 500);
 };
+
 //count score
 const countScore = () => {
   scores++;
@@ -79,4 +102,12 @@ const gameWon = () => {
 // replay button
 replatButton.addEventListener("click", () => {
   window.location.reload();
+});
+//cards click
+cards.forEach((card) => {
+  card.addEventListener("click", () => {
+    flipAudio();
+    flipCard(card);
+    matchedOrUnmatched(card);
+  });
 });
