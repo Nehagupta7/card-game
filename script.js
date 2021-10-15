@@ -4,7 +4,7 @@ const replatButton = document.querySelector("#replay-btn");
 const gameOver = document.querySelector(".game-over");
 const cards = document.querySelectorAll(".card");
 const cardContainer = document.querySelector(".card-container");
-let startTimer = 100;
+let startTimer = 60;
 let visibleCard = [];
 let scores = 0;
 
@@ -21,6 +21,7 @@ let scores = 0;
 const timerStore = setInterval(() => {
   startTimer = startTimer - 1;
   timer.innerText = startTimer;
+  timer.classList.remove("big");
 
   if (startTimer == 0) {
     clearInterval(timerStore);
@@ -29,17 +30,26 @@ const timerStore = setInterval(() => {
     clearInterval(timerStore);
     gameWon();
   }
+  if (startTimer <= 10) {
+    setInterval(lastTenTimerCount, 1000);
+  }
 }, 1000);
+
+//last timer
+const lastTenTimerCount = () => {
+  timer.classList.add("big");
+  timer.style.color = "red";
+};
 
 //flip audio
 const flipAudio = () => {
-  const audio = new Audio("memory game/images/audio/flip.wav");
+  const audio = new Audio("memory game/images/audio/flip.WAV");
   audio.play();
 };
 
 //match audio
 const matchAudio = () => {
-  const audio = new Audio("memory game/images/audio/match.wav");
+  const audio = new Audio("memory game/images/audio/match.WAV");
   audio.play();
 };
 
