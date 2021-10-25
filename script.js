@@ -29,8 +29,7 @@ const timerStore = setInterval(() => {
   } else if (startTimer >= 0 && score.innerHTML == 6) {
     clearInterval(timerStore);
     gameWon();
-  }
-  if (startTimer <= 10) {
+  } else if (startTimer <= 10) {
     setInterval(lastTenTimerCount, 1000);
   }
 }, 1000);
